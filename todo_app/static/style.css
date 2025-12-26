@@ -1,0 +1,204 @@
+/* --- 基本設定と変数 --- */
+:root {
+    --bg-color: #f4f7f9;
+    --card-bg-color: #ffffff;
+    --text-color: #333333;
+    --subtle-text-color: #888888;
+    --border-color: #e0e0e0;
+    --primary-color: #3498db;
+    --danger-color: #e74c3c;
+    --success-color: #2ecc71;
+    --font-family: 'Poppins', sans-serif;
+}
+
+/* ダークモード設定 */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #1a1a1a;
+        --card-bg-color: #2c2c2c;
+        --text-color: #e0e0e0;
+        --subtle-text-color: #a0a0a0;
+        --border-color: #444444;
+    }
+}
+
+body {
+    font-family: var(--font-family), serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+}
+
+/* --- カードデザイン --- */
+.card {
+    background-color: var(--card-bg-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    padding: 25px 30px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.card-header {
+    text-align: center;
+    font-weight: 700;
+    font-size: 2rem;
+    margin: 0 0 25px 0;
+}
+
+/* --- フォーム関連 --- */
+.add-form, .edit-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+input[type="text"] {
+    flex-grow: 1;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* --- ボタン --- */
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-add {
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1.5rem;
+    line-height: 1;
+    padding: 0 18px;
+}
+.btn-add:hover { background-color: #2980b9; }
+
+.btn-edit { background-color: #f39c12; color: white; }
+.btn-edit:hover { background-color: #e67e22; }
+
+.btn-delete { background-color: var(--danger-color); color: white; }
+.btn-delete:hover { background-color: #c0392b; }
+
+.btn-update { background-color: var(--success-color); color: white; flex-grow: 1; }
+.btn-update:hover { background-color: #27ae60; }
+
+.btn-cancel { background-color: #bdc3c7; color: #333; }
+.btn-cancel:hover { background-color: #95a5a6; }
+
+
+/* --- タスクリスト --- */
+.task-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 5px;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s;
+}
+.task-item:last-child { border-bottom: none; }
+.task-item:hover { background-color: rgba(0, 0, 0, 0.03); }
+@media (prefers-color-scheme: dark) {
+    .task-item:hover { background-color: rgba(255, 255, 255, 0.05); }
+}
+
+
+.task-text {
+    flex-grow: 1;
+    margin: 0 15px;
+}
+
+.task-actions {
+    display: flex;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.task-item:hover .task-actions {
+    opacity: 1;
+}
+
+/* 完了済みタスクのスタイル */
+.task-item.done .task-text {
+    text-decoration: line-through;
+    color: var(--subtle-text-color);
+}
+
+.task-item.done .checkmark {
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+}
+.task-item.done .checkmark::after {
+    opacity: 1;
+}
+
+/* カスタムチェックマーク */
+.toggle-btn {
+    cursor: pointer;
+}
+.checkmark {
+    display: block;
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--subtle-text-color);
+    border-radius: 50%;
+    position: relative;
+    transition: all 0.2s;
+}
+.checkmark::after {
+    content: '';
+    position: absolute;
+    top: 3px; left: 7px;
+    width: 6px; height: 12px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.empty-message {
+    text-align: center;
+    color: var(--subtle-text-color);
+    padding: 40px 0;
+}

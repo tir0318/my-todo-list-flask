@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h1 class="card-header">Edit Task</h1>
+
+    <form action="{{ url_for('update_task', task_id=task_id) }}" method="post" class="edit-form">
+        <!-- ↓↓↓ この行を修正しました ↓↓↓ -->
+        <input type="text" name="updated_task" value="{{ task.text }}" required autocomplete="off" autofocus spellcheck="false">
+        
+        <div class="form-actions">
+            <a href="{{ url_for('index') }}" class="btn btn-cancel">Cancel</a>
+            <button type="submit" class="btn btn-update">Update</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

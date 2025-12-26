@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h1 class="card-header">My Todo List</h1>
+
+    <!-- タスク追加フォーム -->
+    <form action="{{ url_for('add_task') }}" method="post" class="add-form">
+        <input type="text" name="task" placeholder="Add a new task..." required autocomplete="off" spellcheck="false">
+        <button type="submit" class="btn btn-add">+</button>
+    </form>
+
+    <!-- タスクリスト -->
+    <ul class="task-list">
+        {% for task in tasks %}
+        <li class="task-item {% if task.done %}done{% endif %}">
+            <!-- 完了/未完了 切り替えボタン -->
+            <a href="{{ url_for('toggle_task', task_id=loop.index0) }}" class="toggle-btn">
+                <span class="checkmark"></span>
+            </a>
+
+            <!-- タスク名 -->
+            <span class="task-text">{{ task.text }}</span>
+
+            <!-- 操作ボタン -->
+            <div class="task-actions">
+                <a href="{{ url_for('edit_task', task_id=loop.index0) }}" class="btn btn-edit">Edit</a>
+                <a href="{{ url_for('delete_task', task_id=loop.index0) }}" class="btn btn-delete delete-confirm">Delete</a>
+            </div>
+        </li>
+        {% else %}
+        <li class="empty-message">No tasks yet. Let's add one!</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
